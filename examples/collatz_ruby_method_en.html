@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/codemirror.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/mode/ruby/ruby.min.js"></script>
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <!-- ↓ Do not rewrite -->
+    <script src="onbrowserjudge.js"></script>
+    <script> OnBrowserJudge.workerFile = "ruby.js" </script>
+    <!-- ↑ Do not rewrite -->
+    <script>
+      // ↓ must be defined
+      OnBrowserJudge.getProgram = () => editor.getValue()
+      // ↑ must be defined
+
+      // ↓ for translation
+      // OnBrowserJudge.dict.ready = "▶Run";
+      // OnBrowserJudge.dict.running = "Running";
+      // OnBrowserJudge.dict.preparation = "In preparation";
+      // OnBrowserJudge.dict.case_name = "Case Name";
+      // OnBrowserJudge.dict.status = "Status";
+      // OnBrowserJudge.dict.exec_time = "Exec Time";
+      // OnBrowserJudge.dict.copy = "Copy";
+      // OnBrowserJudge.dict.copied = "Copied.";
+      // OnBrowserJudge.dict.AC = "AC";
+      // OnBrowserJudge.dict.WA = "WA";
+      // OnBrowserJudge.dict.RE = "RE";
+      // OnBrowserJudge.dict.TLE = "TLE";
+      // OnBrowserJudge.dict.WJ = "WJ";
+
+      // OnBrowserJudge.timeLimit = 2000
+
+      OnBrowserJudge.process = (program, casename, input) => program + `
+
+puts collatz(gets.to_i)
+`
+      // OnBrowserJudge.assertEqual = (expected, actual) => expected == actual.trimEnd()
+
+      // ↓ function to execute on success
+      // OnBrowserJudge.congratulations = () => { alert("Congratulations!") }
+    </script>
+    <title>Collatz conjecture - OnBrowser Judge example (Ruby - method)</title>
+  </head>
+
+  <body>
+    <h1>Collatz conjecture - OnBrowser Judge example (Ruby - method)</h1>
+    <hr />
+
+    <h2>Problem Statement</h2>
+    <p>
+      There is an unsolved mathematical problem called the "Collatz conjecture." 
+      For any natural number, if you repeat the "operation" of "If it is odd, multiply by \(3\) and add \(1\). If it is even, divide it by \(2\)."
+      The expectation is that if you repeat this "operation" over and over again, you will always end up with \(1\) at some point. 
+    </p>
+    <p>
+      Given a natural number \(n\), find the number of "operations" required for it to become \(1\).
+    </p>
+
+    <h2>Constraints</h2>
+    <ul>
+      <li>\(1 ≤ n ≤ 10000\)</li>
+      <li>\(n\) is integer.</li>
+    </ul>
+    <hr />
+
+    <h2>Input</h2>
+    The natural number \(n\) is given as an argument in the following form:
+    <div class="io_format"><code>collatz(n)</code></div>
+
+    <h2>Output</h2>
+    <p><code>return</code> the minimum number of "operations" required for \(n\) to become \(1\), as an integer.</p>
+    <hr />
+
+    <h2>Sample Input 1</h2>
+    <pre id="sample1_dummyinput" class="sample">collatz(5)</pre>
+    <pre id="sample1_input" class="testcase">5</pre>
+
+    <h2>Sample Output 1</h2>
+    <pre id="sample1_output" class="sample">5</pre>
+    <p>\(5 → 16 → 8 → 4 → 2 → 1\) and so on for \(5\) "operations" to \(1\).</p>
+    <hr />
+    <!-- Prepare at least one set of pre elements whose ids are "*_input" and "*_output". -->
+    <!-- pre.sample is automatically given a copy button. -->
+
+    <h2>Sample Input 2</h2>
+    <pre id="sample2_dummyinput" class="sample">collatz(7)</pre>
+    <pre id="sample2_input" class="testcase">7</pre>
+
+    <h2>Sample Output 2</h2>
+    <pre id="sample2_output" class="sample">16</pre>
+    <hr />
+
+    <h2>Sample Input 3</h2>
+    <pre id="sample3_dummyinput" class="sample">collatz(1)</pre>
+    <pre id="sample3_input" class="testcase">1</pre>
+
+    <h2>Sample Output 3</h2>
+    <pre id="sample3_output" class="sample">0</pre>
+    <p>If it is \(1\) from the beginning, no "operation" is needed, which means that the "operation" is \(0\) times.</p>
+    <hr />
+
+    <pre id="testcase1_input"  class="testcase">27</pre>
+    <pre id="testcase1_output" class="testcase">111</pre>
+
+    <pre id="testcase2_input"  class="testcase">55</pre>
+    <pre id="testcase2_output" class="testcase">112</pre>
+
+    <textarea id="txt-editor">
+def collatz(n)
+  
+end
+</textarea>
+    <p>
+      <!-- ↓ Required: button#run -->
+      <button id="run"></button> 
+      <input type="checkbox" id="autocopy" checked /><label for="autocopy">automatically copy the program at run time</label>
+      <!-- ↑ Better to exist: input[type=checkbox]#autocopy -->
+    </p>
+    <p>Results:</p>
+    <!-- ↓ Required: table#result -->
+    <table id="result"></table>
+
+    <script>
+const editor = CodeMirror.fromTextArea(document.getElementById("txt-editor"), {
+    lineNumbers: true,
+    mode: "ruby",
+    indentUnit: 2
+})
+editor.setOption("extraKeys", {
+    "Tab": function(cm) {
+        if (cm.somethingSelected()) cm.indentSelection("add")
+        else cm.replaceSelection(Array(cm.getOption("indentUnit") + 1).join(" "), "end", "+input")
+    },
+    "Shift-Tab": function(cm) {
+        cm.execCommand("indentLess")
+    },
+    "Ctrl-Enter": function(cm) {
+        OnBrowserJudge.runButtonPressed()
+    }
+})
+    </script>
+  </body>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/codemirror.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/mode/ruby/ruby.min.js"></script>
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <!-- ↓ Do not rewrite -->
+    <script src="onbrowserjudge.js"></script>
+    <script> OnBrowserJudge.workerFile = "ruby.js" </script>
+    <!-- ↑ Do not rewrite -->
+    <script>
+      // ↓ must be defined
+      OnBrowserJudge.getProgram = () => editor.getValue()
+      // ↑ must be defined
+
+      // ↓ for translation
+      // OnBrowserJudge.dict.ready = "▶Run";
+      // OnBrowserJudge.dict.running = "Running";
+      // OnBrowserJudge.dict.preparation = "In preparation";
+      // OnBrowserJudge.dict.case_name = "Case Name";
+      // OnBrowserJudge.dict.status = "Status";
+      // OnBrowserJudge.dict.exec_time = "Exec Time";
+      // OnBrowserJudge.dict.copy = "Copy";
+      // OnBrowserJudge.dict.copied = "Copied.";
+      // OnBrowserJudge.dict.AC = "AC";
+      // OnBrowserJudge.dict.WA = "WA";
+      // OnBrowserJudge.dict.RE = "RE";
+      // OnBrowserJudge.dict.TLE = "TLE";
+      // OnBrowserJudge.dict.WJ = "WJ";
+
+      // OnBrowserJudge.timeLimit = 2000
+
+      // OnBrowserJudge.process = (program, casename, input) => program
+      // OnBrowserJudge.assertEqual = (expected, actual) => expected == actual.trimEnd()
+
+      // ↓ function to execute on success
+      // OnBrowserJudge.congratulations = () => { alert("Congratulations!") }
+    </script>
+    <title>problem name</title>
+  </head>
+
+  <body>
+    <h1>Problem name</h1>
+    <hr />
+
+    <h2>Problem Statement</h2>
+    <p>write a problem statement</p>
+
+    <h2>Constraints</h2>
+    <ul>
+      <li>ex) \(1 ≤ n ≤ 10000\)</li>
+      <li>\(n\) is integer.</li>
+    </ul>
+    <hr />
+
+    <h2>Input</h2>
+    Input values and its format
+    <div class="io_format">\(n\)</div>
+
+    <h2>Output</h2>
+    <p>Output value and its format</p>
+    <hr />
+
+    <h2>Sample Input 1</h2>
+    <pre id="sample1_input" class="sample">123</pre>
+    <!-- Prepare at least one set of pre elements whose ids are "*_input" and "*_output". -->
+    <!-- pre.sample is automatically given a copy button. -->
+    <h2>Sample Output 1</h2>
+    <pre id="sample1_output" class="sample">456</pre>
+    <p>Explanation</p>
+    <hr />
+
+    <h2>Sample Input 2</h2>
+    <pre id="sample2_input" class="sample">123</pre>
+
+    <h2>Sample Output 2</h2>
+    <pre id="sample2_output" class="sample">456</pre>
+    <hr />
+
+    <pre id="testcase1_input"  class="testcase">123</pre>
+    <pre id="testcase1_output" class="testcase">456</pre>
+
+    <pre id="testcase2_input"  class="testcase">123</pre>
+    <pre id="testcase2_output" class="testcase">456</pre>
+
+    <textarea id="txt-editor"></textarea>
+    <p>
+      <!-- ↓ Required: button#run -->
+      <button id="run"></button> 
+      <input type="checkbox" id="autocopy" checked /><label for="autocopy">automatically copy the program at run time</label>
+      <!-- ↑ Better to exist: input[type=checkbox]#autocopy -->
+    </p>
+    <p>Results:</p>
+    <!-- ↓ Required: table#result -->
+    <table id="result"></table>
+
+    <script>
+const editor = CodeMirror.fromTextArea(document.getElementById("txt-editor"), {
+    lineNumbers: true,
+    mode: "ruby",
+    indentUnit: 2
+})
+editor.setOption("extraKeys", {
+    "Tab": function(cm) {
+        if (cm.somethingSelected()) cm.indentSelection("add")
+        else cm.replaceSelection(Array(cm.getOption("indentUnit") + 1).join(" "), "end", "+input")
+    },
+    "Shift-Tab": function(cm) {
+        cm.execCommand("indentLess")
+    },
+    "Ctrl-Enter": function(cm) {
+        OnBrowserJudge.runButtonPressed()
+    }
+})
+    </script>
+  </body>
+</html>
