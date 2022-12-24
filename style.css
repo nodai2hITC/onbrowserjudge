@@ -43,7 +43,7 @@ button.copy {
     float: right;
 }
 
-pre.testcase {
+.testcase {
     display: none;
 }
 

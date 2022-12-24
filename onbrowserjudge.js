@@ -106,7 +106,7 @@ const OnBrowserJudge = {
 
   nextTest: function() {
     const testCase = this.restTests.shift()
-    const input = document.getElementById(`${testCase}_input`).innerText
+    const input = document.getElementById(`${testCase}_input`).innerText.trim()
     const program = this.process(this.getProgram(), testCase, input)
     this.timer = setTimeout(() => this.tle(testCase), this.timeLimit * 2)
     this.worker.postMessage(["execute", { testCase, program, input }])
@@ -124,7 +124,7 @@ const OnBrowserJudge = {
       result = error == 1 ? "CE" : "RE"
     } else {
       if (execTime > this.timeLimit) result = "TLE"
-      const expected = document.getElementById(`${testCase}_output`).innerText
+      const expected = document.getElementById(`${testCase}_output`).innerText.trim()
       if (! this.assertEqual(expected, output)) result = "WA"
     }
 
@@ -190,15 +190,11 @@ window.addEventListener("DOMContentLoaded", () => {
   }
   OnBrowserJudge.tests = getTestNames()
 
-  function trimAllTestCases(tests) {
-    for (const test of tests) {
-      const input  = document.getElementById(`${test}_input`)
-      const output = document.getElementById(`${test}_output`)
-      input.innerText = input.innerText.trim()
-      output.innerText = output.innerText.trim()
-    }
+  function trimAllSampleCases() {
+    const samples = document.getElementsByClassName("sample")
+    for (const elm of samples) elm.innerText = elm.innerText.trim()
   }
-  trimAllTestCases(OnBrowserJudge.tests)
+  trimAllSampleCases()
 
   function addCopyButton(elms) {
     for (const elm of elms) {
