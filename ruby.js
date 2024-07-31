@@ -1,4 +1,4 @@
-/** 
+/**
  * @file OnBrowserJudge - for Ruby
  * @author nodai2hITC
  * @license MIT License
@@ -44,8 +44,12 @@ $stdout = $stderr = StringIO.new(+'', 'w')
         vm.eval(program)
         output = vm.eval("$stdout.string").toString()
       } catch(err) {
-        output = err.toString()
-        error = 2
+        if (err.toString().indexOf("SystemExit") != -1) {
+          output = vm.eval("$stdout.string").toString();
+        } else {
+          output = err.toString()
+          error = 2
+        }
       }
       const execTime = performance.now() - startTime
       self.postMessage(["executed", { testCase, output, error, execTime }])

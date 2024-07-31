@@ -1,4 +1,4 @@
-/** 
+/**
  * @file OnBrowserJudge - for Python
  * @author nodai2hITC
  * @license MIT License
@@ -51,8 +51,12 @@ sys.stdout = sys.stderr = _out
         self.pyodide.runPython(program, { globals: self.pyodide.toPy({}) })
         output = self.pyodide.runPython("_out.getvalue()", { globals: globals })
       } catch(err) {
-        output = err.toString()
-        error = 2
+        if (err.toString().indexOf("SystemExit") != -1) {
+          output = self.pyodide.runPython("_out.getvalue()", { globals: globals });
+        } else {
+          output = err.toString()
+          error = 2
+        }
       }
       const execTime = performance.now() - startTime
       self.postMessage(["executed", { testCase, output, error, execTime }])
