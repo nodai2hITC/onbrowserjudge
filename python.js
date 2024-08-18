@@ -7,7 +7,7 @@
 
 "use strict"
 
-importScripts("https://cdn.jsdelivr.net/pyodide/v0.21.3/full/pyodide.js")
+importScripts("https://cdn.jsdelivr.net/pyodide/v0.26.2/full/pyodide.js")
 
 let pyodideReadyPromise
 

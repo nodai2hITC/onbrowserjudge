@@ -7,16 +7,15 @@
 
 "use strict"
 
-const script = "https://cdn.jsdelivr.net/npm/ruby-head-wasm-wasi@0.5.0-2022-12-19-a/dist/browser.umd.js"
-const wasm = "https://cdn.jsdelivr.net/npm/ruby-head-wasm-wasi@0.5.0-2022-12-19-a/dist/ruby+stdlib.wasm"
+const script = "https://cdn.jsdelivr.net/npm/@ruby/wasm-wasi@2.6.2/dist/browser.umd.js"
+const wasm = "https://cdn.jsdelivr.net/npm/@ruby/3.3-wasm-wasi@2.6.2/dist/ruby+stdlib.wasm"
 
 importScripts(script)
 let RubyModule
 const { DefaultRubyVM } = this["ruby-wasm-wasi"]
 const main = async () => {
   const response = await fetch(wasm)
-  const buffer = await response.arrayBuffer()
-  RubyModule = await WebAssembly.compile(buffer)
+  RubyModule = await WebAssembly.compileStreaming(response)
   self.postMessage(["init"])
 }
 main()
